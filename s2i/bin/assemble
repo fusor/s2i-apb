@@ -1,0 +1,19 @@
+#!/bin/bash -e
+#
+# S2I assemble script for the 's2i-apb-builder' image.
+# The 'assemble' script builds your application source so that it is ready to run.
+#
+# For more information refer to the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+# If the 's2i-apb-builder' assemble script is executed with the '-h' flag, print the usage.
+if [[ "$1" == "-h" ]]; then
+	exec /usr/libexec/s2i/usage
+fi
+
+echo "---> Copying over APB's action files..."
+cp -Rf /tmp/src/playbooks/* /opt/apb/actions/
+
+echo "---> Copying over APB's ansible roles folder..."
+cp -Rf /tmp/src/roles/* /opt/ansible/roles/
