@@ -16,6 +16,14 @@ will also not work because the `hello-world-apb` is not its own repo.
 ### Manual Spec File LABEL Update
 Manual update of the APB's spec file encoded `LABEL` value is required.  Each APB is unique in that it has its spec file, which is base64 encoded as a LABEL.  Currenlty `s2i` does not support specifying a custom LABEL during the `assemble` step.  Therefore a manual script must be ran to update the created APB image.
 
+## Index
+  * [Quick Start](#quick-start)
+  * [Creating the builder image](#creating-the-builder-image)
+  * [Creating the APB image](#creating-the-apb-image)
+    * [Manual Steps](#manual-steps)
+    * [Using a script](#using-a-script)
+  * [Running the APB image](#running-the-apb-image)
+
 ## Quick start
   * Run the `make` to create the builder image `s2i-apb-builder`
   * Have the source code of an APB available locally
