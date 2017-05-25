@@ -1,5 +1,5 @@
 
-# Creating a basic S2I builder image  
+# S2I builder image for Ansible-Playbook-Bundle
 
 ## Overview
 This is a [Source-to-Image](https://docs.openshift.org/latest/architecture/core_concepts/builds_and_image_streams.html#source-build)
