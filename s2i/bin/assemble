@@ -6,6 +6,38 @@
 # For more information refer to the documentation:
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
+APB_BASE_DIR=/opt/apb
+APB_SPEC_VERSION_PATTERN="com.redhat.apb.version"
+APB_SPEC_LABEL_PATTERN="com.redhat.apb.spec"
+APB_DOCKERFILE=/tmp/src/Dockerfile
+APB_DOCKER_LABEL_YML_FILE=${APB_BASE_DIR}/apb_docker_labels.yml
+
+
+#
+# get_label_value()
+#
+# Args: $1 - Dockerfile Path
+#       $2 - LABEL pattern to search for
+#       $3 - LABEL name to set (return value)
+#
+get_label_value ()
+{
+  filename=$1
+  pattern=$2
+  while read line; do
+    if [[ $line =~ ${pattern} ]] ; then
+      export APB_LABEL=${line};
+      break;
+    fi
+  done < ${filename}
+
+  # strip the line to only get the value portion w/o quotes
+  APB_LABEL=${APB_LABEL#*=}  #rightside of '=' char
+  APB_LABEL=${APB_LABEL#\"}  #remove starting quote char
+  APB_LABEL=${APB_LABEL%\"}  #remove trailing quote char
+
+  eval "$3=${APB_LABEL}"
+}
 
 # If the 's2i-apb-builder' assemble script is executed with the '-h' flag, print the usage.
 if [[ "$1" == "-h" ]]; then
@@ -13,7 +45,23 @@ if [[ "$1" == "-h" ]]; then
 fi
 
 echo "---> Copying over APB's action files..."
-cp -Rf /tmp/src/playbooks/* /opt/apb/actions/
+cp -Rf /tmp/src/playbooks/* ${APB_BASE_DIR}/actions/
 
 echo "---> Copying over APB's ansible roles folder..."
 cp -Rf /tmp/src/roles/* /opt/ansible/roles/
+
+echo "---> Getting the APB Dockerfile Version LABEL Value..."
+get_label_value ${APB_DOCKERFILE} ${APB_SPEC_VERSION_PATTERN} APB_VERSION_LABEL
+
+echo "---> Getting the APB Dockerfile SpecFile LABEL Value..."
+get_label_value ${APB_DOCKERFILE} ${APB_SPEC_LABEL_PATTERN} APB_SPEC_LABEL
+
+echo "---> Creating '${APB_DOCKER_LABEL_YML_FILE}' with the above labels..."
+cat > ${APB_DOCKER_LABEL_YML_FILE} << EOL
+---
+labels:
+  com.redhat.apb.version: ${APB_VERSION_LABEL}
+  com.redhat.apb.spec: ${APB_SPEC_LABEL}
+EOL
+
+echo "---> FINISHED 'assemble' script for APB image"
