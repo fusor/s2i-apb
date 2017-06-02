@@ -10,7 +10,7 @@ APB_BASE_DIR=/opt/apb
 APB_SPEC_VERSION_PATTERN="com.redhat.apb.version"
 APB_SPEC_LABEL_PATTERN="com.redhat.apb.spec"
 APB_DOCKERFILE=/tmp/src/Dockerfile
-APB_DOCKER_LABEL_YML_FILE=${APB_BASE_DIR}/apb_docker_labels.yml
+APB_DOCKER_LABEL_FILE="${APB_BASE_DIR}/apb_docker_labels.json"
 
 
 #
@@ -56,12 +56,12 @@ get_label_value ${APB_DOCKERFILE} ${APB_SPEC_VERSION_PATTERN} APB_VERSION_LABEL
 echo "---> Getting the APB Dockerfile SpecFile LABEL Value..."
 get_label_value ${APB_DOCKERFILE} ${APB_SPEC_LABEL_PATTERN} APB_SPEC_LABEL
 
-echo "---> Creating '${APB_DOCKER_LABEL_YML_FILE}' with the above labels..."
-cat > ${APB_DOCKER_LABEL_YML_FILE} << EOL
----
-labels:
-  com.redhat.apb.version: ${APB_VERSION_LABEL}
-  com.redhat.apb.spec: ${APB_SPEC_LABEL}
+echo "---> Creating '${APB_DOCKER_LABEL_FILE}' with the above labels..."
+cat > ${APB_DOCKER_LABEL_FILE} << EOL
+{
+  "com.redhat.apb.version": "${APB_VERSION_LABEL}",
+  "com.redhat.apb.spec": "${APB_SPEC_LABEL}"
+}
 EOL
 
 echo "---> FINISHED 'assemble' script for APB image"
