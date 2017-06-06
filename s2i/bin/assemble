@@ -10,7 +10,7 @@ APB_BASE_DIR=/opt/apb
 APB_SPEC_VERSION_PATTERN="com.redhat.apb.version"
 APB_SPEC_LABEL_PATTERN="com.redhat.apb.spec"
 APB_DOCKERFILE=/tmp/src/Dockerfile
-APB_DOCKER_LABEL_FILE="/opt/docker/new_labels.json"
+APB_DOCKER_LABEL_FILE="/opt/docker/image_metadata.json"
 
 
 #
