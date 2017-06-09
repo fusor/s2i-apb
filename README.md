@@ -65,7 +65,7 @@ To create a builder image for APB run `make` in the folder.
 $ cd s2i-apb
 $ make
 ```
-Note: you should only have to do this ONCE since this base image will not change in your APB development work flow.
+Note: you should only have to do this ONCE since this base image will not change in your APB development work flow.  Also, you can skip creating the docker image and use the [docker.io/ansibleplaybookbundle/s2i-apb](https://hub.docker.com/r/ansibleplaybookbundle/s2i-apb/) image.
 
 ## Creating the APB image
 
@@ -76,7 +76,12 @@ The APB image combines the builder image with your APB source code, which is ser
 The following command will create the `hello-world` APB image in the `test` folder:
 ```bash
 $ s2i build test/test-app s2i-apb hello-s2i-test-apb
+
+or
+
+$ s2i build test/test-app docker.io/ansibleplaybookbundle/s2i-apb hello-s2i-test-apb
 ```
+
 The *assemble* script of `s2i` will create an APB image using the builder image (s2i-apb) as a base and including the necessary files from the test/test-app directory.
 
 ### Update the Spec File LABEL
