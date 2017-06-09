@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# S2I assemble script for the 's2i-apb-builder' image.
+# S2I assemble script for the 's2i-apb' image.
 # The 'assemble' script builds your application source so that it is ready to run.
 #
 # For more information refer to the documentation:
@@ -38,7 +38,7 @@ get_label_value ()
   eval "$3=${APB_LABEL}"
 }
 
-# If the 's2i-apb-builder' assemble script is executed with the '-h' flag, print the usage.
+# If the 's2i-apb' assemble script is executed with the '-h' flag, print the usage.
 if [[ "$1" == "-h" ]]; then
 	exec /usr/libexec/s2i/usage
 fi

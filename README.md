@@ -25,9 +25,9 @@ Manual update of the APB's spec file encoded `LABEL` value is required.  Each AP
   * [Running the APB image](#running-the-apb-image)
 
 ## Quick start
-  * Run the `make` to create the builder image `s2i-apb-builder`
+  * Run the `make` to create the builder image `s2i-apb`
   * Have the source code of an APB available locally
-  * Run the `s2i build <path-to-APB-src> s2i-apb-builder <APB-image>`
+  * Run the `s2i build <path-to-APB-src> s2i-apb <APB-image>`
   * Update the spec file label via script `utils/update-apb-label.sh <path-to-APB-spec> <APB-image>`
   * Run the docker image with `docker run ...`
 
@@ -75,9 +75,9 @@ The APB image combines the builder image with your APB source code, which is ser
 
 The following command will create the `hello-world` APB image in the `test` folder:
 ```bash
-$ s2i build test/test-app s2i-apb-builder hello-s2i-test-apb
+$ s2i build test/test-app s2i-apb hello-s2i-test-apb
 ```
-The *assemble* script of `s2i` will create an APB image using the builder image (s2i-apb-builder) as a base and including the necessary files from the test/test-app directory.
+The *assemble* script of `s2i` will create an APB image using the builder image (s2i-apb) as a base and including the necessary files from the test/test-app directory.
 
 ### Update the Spec File LABEL
 In order to update the spec file LABEL, do the follwoing

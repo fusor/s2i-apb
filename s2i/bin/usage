@@ -1,11 +1,11 @@
 #!/bin/bash -e
 cat <<EOF
-This is the s2i-apb-builder S2I image:
+This is the s2i-apb S2I image:
 To use it, install S2I: https://github.com/openshift/source-to-image
 
 Sample invocation:
 
-s2i build <APB source code path> s2i-apb-builder <APB image>
+s2i build <APB source code path> s2i-apb <APB image>
 
 You can then run the resulting image via:
 docker run --entrypoint /usr/bin/entrypoint.sh \

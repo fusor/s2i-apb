@@ -1,5 +1,5 @@
 
-# s2i-apb-builder
+# s2i-apb
 FROM ansibleplaybookbundle/apb-base
 MAINTAINER Ansible Playbook Bundle Community
 

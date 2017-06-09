@@ -1,5 +1,5 @@
 
-IMAGE_NAME = s2i-apb-builder
+IMAGE_NAME = s2i-apb
 
 SHELL = bash
 
