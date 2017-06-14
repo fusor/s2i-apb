@@ -16,16 +16,16 @@ ENV HOME=${BASE_DIR}
 USER root
 RUN mkdir -p /opt/ansible/roles
 RUN mkdir -p ${BASE_DIR}/actions
-RUN mkdir -p /tmp/docker
+RUN mkdir -p /tmp/.s2i
 
 RUN chown ${USER_NAME}:0 /opt/ansible/roles
 RUN chown ${USER_NAME}:0 ${BASE_DIR}/actions
-RUN chown ${USER_NAME}:0 /tmp/docker
+RUN chown ${USER_NAME}:0 /tmp/.s2i
 
 USER ${USER_NAME}
 RUN chmod  g+rw /opt/ansible/roles
 RUN chmod  g+rw ${BASE_DIR}/actions
-RUN chmod  a+rw /tmp/docker
+RUN chmod  a+rw /tmp/.s2i
 
 ENTRYPOINT []
 CMD ["usage"]
