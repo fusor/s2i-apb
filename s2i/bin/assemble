@@ -58,7 +58,7 @@ get_label_value ${APB_DOCKERFILE} ${APB_SPEC_LABEL_PATTERN} APB_SPEC_LABEL
 echo "---> Creating '${APB_DOCKER_LABEL_FILE}' with the above labels..."
 cat > ${APB_DOCKER_LABEL_FILE} << EOL
 {
-  "Labels": [
+  "labels": [
     {"com.redhat.apb.version": "${APB_VERSION_LABEL}"},
     {"com.redhat.apb.spec": "${APB_SPEC_LABEL}"}
   ]
