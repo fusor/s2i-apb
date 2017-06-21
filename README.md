@@ -13,22 +13,16 @@ Git URL will only work if the APB source is at the top level.  The Git repo such
 Similarly, the URL such as [apb-examples/hello-world-apb](https://github.com/fusor/apb-examples/tree/master/hello-world-apb)
 will also not work because the `hello-world-apb` is not its own repo.
 
-### Manual Spec File LABEL Update
-Manual update of the APB's spec file encoded `LABEL` value is required.  Each APB is unique in that it has its spec file, which is base64 encoded as a LABEL.  Currenlty `s2i` does not support specifying a custom LABEL during the `assemble` step.  Therefore a manual script must be ran to update the created APB image.
-
 ## Index
   * [Quick Start](#quick-start)
   * [Creating the builder image](#creating-the-builder-image)
   * [Creating the APB image](#creating-the-apb-image)
-    * [Manual Steps](#manual-steps)
-    * [Using a script](#using-a-script)
   * [Running the APB image](#running-the-apb-image)
 
 ## Quick start
   * Run the `make` to create the builder image `s2i-apb`
   * Have the source code of an APB available locally
   * Run the `s2i build <path-to-APB-src> s2i-apb <APB-image>`
-  * Update the spec file label via script `utils/update-apb-label.sh <path-to-APB-spec> <APB-image>`
   * Run the docker image with `docker run ...`
 
 ## Files and Directories  
@@ -69,8 +63,6 @@ Note: you should only have to do this ONCE since this base image will not change
 
 ## Creating the APB image
 
-## Manual Steps
-### Build APB Image
 The APB image combines the builder image with your APB source code, which is served using whatever application is installed via the *Dockerfile*, compiled using the *assemble* script
 
 The following command will create the `hello-world` APB image in the `test` folder:
@@ -83,22 +75,6 @@ $ s2i build test/test-app docker.io/ansibleplaybookbundle/s2i-apb hello-s2i-test
 ```
 
 The *assemble* script of `s2i` will create an APB image using the builder image (s2i-apb) as a base and including the necessary files from the test/test-app directory.
-
-### Update the Spec File LABEL
-In order to update the spec file LABEL, do the follwoing
-
-Navigate to the `utils` folder, and run the `update-apb-label.sh` script as follows:
-```bash
-$ cd utils
-$ ./update-apb-label.sh ../test/test-app/apb.yml hello-s2i-test-apb
-```
-
-## Using a script
-You may use the `s2i-build-apb.sh` script in to automate the build and the update-label process by running the following command
-```bash
-$ cd utils
-$ ./s2i-build-apb.sh ../test/test-app hello-s2i-test-apb
-```
 
 ## Running the APB image
 You may run the APB image by the `docker run` command.  However you will need to have your own OpenShift environment.
