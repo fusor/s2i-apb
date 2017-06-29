@@ -3,8 +3,9 @@
 FROM ansibleplaybookbundle/apb-base
 MAINTAINER Ansible Playbook Bundle Community
 
-LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
-LABEL io.openshift.s2i.destination=/tmp
+LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
+      io.openshift.s2i.destination=/tmp \
+      io.openshift.tags="builder,apb"
 
 COPY ./s2i/bin/ /usr/libexec/s2i
 
@@ -14,18 +15,18 @@ ENV USER_NAME=apb \
 ENV HOME=${BASE_DIR}
 
 USER root
-RUN mkdir -p /opt/ansible/roles
-RUN mkdir -p ${BASE_DIR}/actions
-RUN mkdir -p /tmp/.s2i
+RUN mkdir -p /opt/ansible/roles && \
+    mkdir -p ${BASE_DIR}/actions && \
+    mkdir -p /tmp/.s2i
 
-RUN chown ${USER_NAME}:0 /opt/ansible/roles
-RUN chown ${USER_NAME}:0 ${BASE_DIR}/actions
-RUN chown ${USER_NAME}:0 /tmp/.s2i
+RUN chown ${USER_NAME}:0 /opt/ansible/roles && \
+    chown ${USER_NAME}:0 ${BASE_DIR}/actions && \
+    chown ${USER_NAME}:0 /tmp/.s2i
 
 USER ${USER_NAME}
-RUN chmod  g+rw /opt/ansible/roles
-RUN chmod  g+rw ${BASE_DIR}/actions
-RUN chmod  a+rw /tmp/.s2i
+RUN chmod  g+rw /opt/ansible/roles && \
+    chmod  g+rw ${BASE_DIR}/actions && \
+    chmod  a+rw /tmp/.s2i
 
 ENTRYPOINT []
 CMD ["usage"]
