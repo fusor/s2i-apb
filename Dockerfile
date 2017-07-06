@@ -10,7 +10,6 @@ LABEL io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
 COPY ./s2i/bin/ /usr/libexec/s2i
 
 ENV USER_NAME=apb \
-    USER_UID=1001 \
     BASE_DIR=/opt/${USER_NAME}
 ENV HOME=${BASE_DIR}
 
@@ -27,6 +26,8 @@ USER ${USER_NAME}
 RUN chmod  g+rw /opt/ansible/roles && \
     chmod  g+rw ${BASE_DIR}/actions && \
     chmod  a+rw /tmp/.s2i
+
+USER 1001
 
 ENTRYPOINT []
 CMD ["usage"]
