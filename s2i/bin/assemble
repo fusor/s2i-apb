@@ -30,6 +30,11 @@ get_label_value ()
     fi
   done < ${filename}
 
+  if [ -z ${APB_LABEL+x} ]; then
+    echo -e "\nERROR: the pattern '$2' was NOT found in the filename '$1'\n"
+    exit -1
+  fi
+
   # strip the line to only get the value portion w/o quotes
   APB_LABEL=${APB_LABEL#*=}  #rightside of '=' char
   APB_LABEL=${APB_LABEL#\"}  #remove starting quote char
