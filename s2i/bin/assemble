@@ -58,7 +58,7 @@ echo "---> Getting the APB Dockerfile Version LABEL Value..."
 get_label_value ${APB_DOCKERFILE} ${APB_SPEC_VERSION_PATTERN} APB_VERSION_LABEL
 
 echo "---> Getting the APB Dockerfile SpecFile LABEL Value..."
-get_label_value ${APB_DOCKERFILE} ${APB_SPEC_LABEL_PATTERN} APB_SPEC_LABEL
+APB_SPEC_LABEL=`base64 /tmp/src/apb.yml -w 0`
 
 echo "---> Creating '${APB_DOCKER_LABEL_FILE}' with the above labels..."
 cat > ${APB_DOCKER_LABEL_FILE} << EOL
