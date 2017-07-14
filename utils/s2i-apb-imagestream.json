@@ -1,0 +1,30 @@
+{
+    "kind": "ImageStream",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "apb",
+        "annotations": {
+            "openshift.io/display-name": "APB S2i Builder"
+        }
+    },
+    "spec": {
+        "tags": [
+            {
+                "name": "latest",
+                "annotations": {
+                  "openshift.io/display-name": "APB Builder (Latest)",
+                  "description": "Source-to-Image Builder for Ansible Playbook Bundles (APBs). For more information about using this builder image, visit https://github.com/fusor/s2i-apb",
+                  "iconClass": "icon-ansible",
+                  "tags": "builder,ansible,apb",
+                  "supports":"ansible",
+                  "sampleRepo": "https://github.com/fusor/s2i-example-apb",
+                  "version": "latest"
+                },
+                "from": {
+                  "kind": "DockerImage",
+                  "name": "docker.io/ansibleplaybookbundle/s2i-apb:latest"
+                }
+            }
+        ]
+    }
+}
