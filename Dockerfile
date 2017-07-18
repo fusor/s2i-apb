@@ -29,5 +29,4 @@ RUN chmod  g+rw /opt/ansible/roles && \
 
 USER 1001
 
-ENTRYPOINT []
 CMD ["usage"]
